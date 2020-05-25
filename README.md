@@ -63,10 +63,10 @@ Python needed about 70ms (derived from only two points of data, see measurements
 The same lack of hard evidence exists in the subscribe execution time.
 
 ## Publish time
-As the most important metric this has been measured as the total time elapsed to execute 1000 publishes using the max payload. In Python the execution takes 2235 ms in JavaScript only 1.7 ms. It is indicating a major difference. The measurement is to be considered incorrect. The JavaScript call for publishing messages must be asynchronous, thus corrupting the timing. *However:* If time spent by the main thread to execute a publish is critical, JavaScript and MQTT.js is without doubt the better solution!
+As the most important metric, this has been measured as the total time elapsed to execute 1000 publishes using the max payload. In Python the execution takes 2235 ms in JavaScript only 1.7 ms. It is indicating a major difference. The measurement is to be considered incorrect. The JavaScript call for publishing messages must be asynchronous, thus corrupting the timing. *However:* If time spent by the main thread to execute a publish is critical, JavaScript and MQTT.js is without doubt the better solution!
 
-In order to guess at the transmission speed of JavaScript the tcp-dumps are taken into consideration. Here for 1000 Publishes from JavaScript the last publish arrives after 90ms. After this time the transmission is ended (probably because the script is finished). But only 44 Frames have been sent! Not 1000! If handled uncarefully JavaScript drops frames (which is okay, since QOS is configured to be 0, but must be taken into consideration). For python the last frame arrives after 1887ms. Here no packages are dropped.
-(90ms/44*1000 = 2045ms -> were JavaScript to send all packages it would need approximately the same time)
+In order to estimate the transmission speed of JavaScript, the tcp-dumps are taken into consideration. Here for 1000 publishes from JavaScript the last publish is logged after 90ms. After this time the transmission is ended (probably because the script is finished). Only 44 Frames have been sent! Not 1000. If handled incautious, JavaScript drops frames (which is okay, since QOS is configured to be 0, but must be taken into consideration). Using python the last frame is logged after 1887ms. Here no packages are dropped.
+(90ms/44*1000 = 2045ms -> were JavaScript to send all packages, it would need approximately the same time)
 
 ## Round Trip Time
-In Round Trip Time python is considerably faster taking only 10ms as opposed to 18ms. This might indicate that the asynchronous task executed by JavaScript Publish is in fact slower than the blocking python method.
+In respect to Round Trip Time, python is considerably faster, taking only 10ms as opposed to 18ms. This might indicate that the asynchronous task executed by JavaScript publish is in fact slower than the blocking python method.
