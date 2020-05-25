@@ -5,8 +5,8 @@ import sys
 def on_connect(client, userdata, flags, rc):
     # Subscribing in on_connect() means that if we lose the connection and
     # reconnect then subscriptions will be renewed.
-    if client.subscribe("payload/testbig"):
-        client.publish("payload/testbig", payload="Big payload", qos=0, retain=False)
+    if client.subscribe("payload/empty"):
+        client.publish("payload/empty", payload="", qos=0, retain=False)
 
 # The callback for message receive
 def on_message(client, userdata, msg):
