@@ -13,6 +13,7 @@ const host="localhost";
 const port=1883;
 const numberOfPublishes = 1000;
 const payload = payloadModule.big;
+
 // connect (blocking)
 performance.mark('connecting');
 var client  = mqtt.connect(host + ":" + port);
