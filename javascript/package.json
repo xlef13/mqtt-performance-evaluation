@@ -1,0 +1,13 @@
+{
+  "name": "mqtt-performance",
+  "version": "0.1.0",
+  "engines" : {
+    "node" : "12.16.3"
+  },
+  "dependencies": {
+    "mqtt": "4.1.0"
+  },
+  "scripts": {
+    "start": "node mqtt.js"
+  }
+}
