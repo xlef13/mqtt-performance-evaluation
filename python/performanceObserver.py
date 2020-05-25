@@ -3,7 +3,7 @@ import time
 
 class PerformanceObserver:
     marks=[]
-
+    result = ""
     def mark(this, name):
         now = time.time()
         existingIndex = this.getMarkIndexByName(name)
@@ -13,7 +13,7 @@ class PerformanceObserver:
         return True
 
     def measure(this, name, markFrom, markTo):
-        print(name + ';' + str(this.getMarkByName(markTo)['startTime']-this.getMarkByName(markFrom)['startTime']) + ';' + str(this.getMarkByName(markTo)['startTime']))
+        this.result += str(name) + ';' + str(this.getMarkByName(markTo)['startTime']-this.getMarkByName(markFrom)['startTime']) + ';' + str(this.getMarkByName(markTo)['startTime']) + "\n"
         return
 
     def getMarkByName(this, name):
@@ -27,3 +27,6 @@ class PerformanceObserver:
             if mark['name'] == name:
                 return index
         return None
+
+    def printResult(this):
+        print(this.result)
