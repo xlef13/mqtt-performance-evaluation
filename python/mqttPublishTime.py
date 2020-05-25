@@ -11,7 +11,6 @@ host="localhost"
 port=1883
 numberOfPublishes = 1000
 payload = payloads.big
-
 # The callback for CONNACK
 def on_connect(client, userdata, flags, rc):
     pass
@@ -43,7 +42,7 @@ client.loop_start()
 # Publish and measure Round Trip Time
 observer.mark("publishing")
 for i in range(0,numberOfPublishes):
-    client.publish("payload/empty", payload=payload, qos=0, retain=False)
+    client.publish("payload/payload", payload=payload, qos=0, retain=False)
 observer.mark("published")
 observer.measure("publishing to published","publishing", "published")
 
