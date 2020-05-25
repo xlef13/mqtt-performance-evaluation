@@ -1,0 +1,15 @@
+version: "2"
+services:
+  mosquitto:
+    image: eclipse-mosquitto:1.6.9
+    volumes:
+        - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+      - default
+    ports:
+      - 1883:1883
+      - 8883:8883
+
+networks:
+    default:
+      driver: bridge
