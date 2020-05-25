@@ -13,7 +13,7 @@ const port=1883
 const payload = payloadModule.big;
 
 performance.mark('connecting');
-var client  = mqtt.connect('mqtt://localhost:1883');
+var client  = mqtt.connect("mqtt://" + host + ":" + port);
 performance.mark('connected');
 performance.measure('connecting to connected', 'connecting', 'connected');
 
@@ -26,6 +26,7 @@ client.on('connect', function () {
 let lastPublishTime = 0;
 client.on('message', function (topic, message) {
   let now = performance.now();
+  // logging to the console is okay at this point as it is the last measurement
   console.log("published to received" + ";" + (now-lastPublishTime).toString() + ";" + now );
 })
 
